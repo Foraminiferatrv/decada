@@ -1,3 +1,3 @@
 export const Home = () => {
-  return <div>HOME</div>
+  return <div>Year Plan</div>
 }

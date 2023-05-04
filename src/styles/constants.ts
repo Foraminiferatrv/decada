@@ -79,3 +79,5 @@ export const grayscalePalette = {
   '800': '#272727',
   '900': '#010101',
 }
+
+export const mainContentWidth = '966px'
