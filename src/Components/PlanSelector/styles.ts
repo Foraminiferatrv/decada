@@ -1,11 +1,13 @@
 export const PlanSelectorWrapper = {
-  maxWidth: 250,
-  minWidth: 150,
-  width: '100%',
-
+  width: '250px',
+  textAlign: 'center',
   fontFamily: 'Roboto Flex',
 }
 
 export const PlanSelector = {
+  borderRadius: '4px',
+  border: '1px solid #5A5A5A',
   height: 33,
+  backgroundColor: '#fff',
+  '*': { border: 'none' },
 }
