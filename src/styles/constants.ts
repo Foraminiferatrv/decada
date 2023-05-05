@@ -81,3 +81,5 @@ export const grayscalePalette = {
 }
 
 export const mainContentWidth = '966px'
+
+export const breakpoints = {}

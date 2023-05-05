@@ -1,5 +1,10 @@
 export const ROUTES = {
   ALL: '*',
   ROOT: '/',
-  HOME: '/home',
+  PLAN: '/plan',
+
+  GOAL: '/plan/goal',
+  FINANCES: '/plan/finances',
+  HABITS: '/plan/habits',
+  TIME: '/plan/time',
 }
