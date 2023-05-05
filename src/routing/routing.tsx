@@ -2,7 +2,7 @@ import { Route, Navigate } from 'react-router-dom'
 
 import { LayoutRoute } from './LayoutRoute'
 import { ROUTES } from '../constants/routes'
-import { Goal } from '../pages/Home/Goal'
+import { Goal } from '../pages/Goal/Goal'
 
 //TODO: Add 404
 //TODO: /plans/id:PLAN_ID/
