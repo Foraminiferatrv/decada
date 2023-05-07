@@ -24,6 +24,9 @@
       "error",
       "tab"
     ],
+    "no-unused-vars": [
+      "warn"
+    ],
     "linebreak-style": [
       "error",
       "unix"

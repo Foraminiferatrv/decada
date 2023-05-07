@@ -3,7 +3,6 @@ import styled from 'styled-components'
 import { cyanBluePalette, grayscalePalette, mainPalette } from '../../styles/constants'
 import { ToggleInput } from '../ToggleInput/ToggleInput'
 import { FavoriteButton } from '../FavoriteButton/FavoriteButton'
-import { LinearProgress } from '@mui/material'
 import { ProgressBar } from '../ProgressBar/ProgressBar'
 
 export const GoalDetails = styled.section`
