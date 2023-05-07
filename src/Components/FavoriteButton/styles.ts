@@ -30,5 +30,9 @@ export const FavoriteButton = styled(IconButton)`
 
       filter: drop-shadow(0 0 3px ${mainPalette[600]});
     }
+
+    &:focus {
+      outline: none;
+    }
   }
 `

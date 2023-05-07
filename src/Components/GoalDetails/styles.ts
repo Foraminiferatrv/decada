@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-import { cyanBluePalette, grayscalePalette, mainPalette } from '../../styles/constants'
+import { grayscalePalette, mainPalette } from '../../styles/constants'
 import { ToggleInput } from '../ToggleInput/ToggleInput'
 import { FavoriteButton } from '../FavoriteButton/FavoriteButton'
 import { ProgressBar } from '../ProgressBar/ProgressBar'
