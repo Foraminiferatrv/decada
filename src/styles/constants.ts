@@ -55,9 +55,9 @@ export const redPalette = {
 }
 
 export const cyanBluePalette = {
-  '50': '#AABFC9',
-  '100': '#8CA8B1',
-  '200': '#6E8E9A',
+  50: '#AABFC9',
+  100: '#8CA8B1',
+  200: '#6E8E9A',
   '300': '#4D7583',
   '400': '#356574',
   '500': '#155263',
