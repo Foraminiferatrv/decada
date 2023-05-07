@@ -8,9 +8,9 @@ import { Goal } from '../pages/Goal/Goal'
 //TODO: /plans/id:PLAN_ID/
 export const routing = [
   <Route path={ROUTES.ROOT} element={<Navigate to={ROUTES.PLAN} />} />,
-  // <Route path={ROUTES.PLAN} element={<Navigate to={ROUTES.GOAL} />} />,
   <Route element={<LayoutRoute />}>
     <Route path={ROUTES.PLAN}>
+      <Route path={ROUTES.PLAN} element={<Navigate to={ROUTES.GOAL} />} />,
       <Route path={ROUTES.GOAL} element={<Goal />} />
       <Route path={ROUTES.FINANCES} element={<div> FINANCES</div>} />
       <Route path={ROUTES.HABITS} element={<div> HABITS</div>} />
