@@ -18,14 +18,19 @@ export const InputLabel = styled.label`
 `
 
 export const ToggleInputContainer = styled.div`
-  border: 1px solid #5a5a5a;
   height: 45px;
+
   padding: 0 15px;
+
+  border: 1px solid #5a5a5a;
   border-radius: 5px;
+
   display: flex;
   align-items: center;
   gap: 10px;
+
   transition-duration: 0.2s;
+
   ${({ readOnly }: ToggleInputProps) =>
     !readOnly &&
     `
@@ -37,8 +42,11 @@ export const ToggleInputContainer = styled.div`
 export const ToggleInputField = styled.input`
   width: 100%;
   height: 100%;
+
   border: none !important;
   outline: none;
+
+  background: none;
 
   text-align: center;
 
