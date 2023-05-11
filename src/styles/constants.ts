@@ -68,6 +68,7 @@ export const cyanBluePalette = {
 }
 
 export const grayscalePalette = {
+  10: '#eeeeee',
   '50': '#D5D5D5',
   '100': '#D0D0D0',
   '200': '#CACACA',

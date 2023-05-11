@@ -13,14 +13,14 @@ export const GoalSolutionsHeader = styled.div`
   width: 100%;
   height: 40px;
 
-  padding-right: 35px;
+  padding: 0 35px 0 10px;
 
   color: ${grayscalePalette[600]};
   font-weight: 600;
 
   display: flex;
   align-items: center;
-  justify-content: end;
+  justify-content: space-between;
 
   border-radius: 5px 5px 0 0;
   background: ${greenPalette[200]};

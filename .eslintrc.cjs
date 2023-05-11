@@ -11,5 +11,6 @@ module.exports = {
   rules: {
     'react-refresh/only-export-components': 'warn',
     'no-unused-vars': 'warn',
+    '@typescript-eslint/no-non-null-assertion': 'none',
   },
 }
