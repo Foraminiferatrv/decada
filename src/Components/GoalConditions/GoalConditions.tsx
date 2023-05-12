@@ -4,7 +4,6 @@ import { v4 as uuidv4 } from 'uuid'
 
 import { ConditionInput } from '../ConditionInput/ConditionInput'
 import { SettingsButton } from '../SettingsButton/SettingsButton'
-import DiamondIcon from '@mui/icons-material/Diamond'
 
 import * as S from './styles'
 
