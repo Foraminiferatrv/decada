@@ -25,6 +25,7 @@ const goalObstacles: GoalObstacle[] = [
 
 export const GoalObstacles = () => {
   const [obstacles, setObstacles] = useState<GoalObstacle[]>(goalObstacles)
+  const [obstacleAdded, setObstacleAdded] = useState<boolean>(false)
 
   const incompleteObstacles = obstacles.filter(({ complete }) => !complete)
   const completeObstacles = obstacles.filter(({ complete }) => complete)
@@ -56,6 +57,7 @@ export const GoalObstacles = () => {
 
   const addObstacle = () => {
     setObstacles([{ id: uuidv4(), name: '', complete: false }, ...obstacles])
+    setObstacleAdded(true)
   }
 
   const incompleteObstaclesInputs = incompleteObstacles.map((obstacle, index) => (
@@ -81,8 +83,11 @@ export const GoalObstacles = () => {
   ))
 
   useEffect(() => {
-    lastObstacleRef.current?.focus()
-  }, [obstacles])
+    if (setObstacleAdded) {
+      lastObstacleRef.current?.focus()
+      setObstacleAdded(false)
+    }
+  }, [obstacleAdded])
 
   return (
     <S.GoalObstacles>
