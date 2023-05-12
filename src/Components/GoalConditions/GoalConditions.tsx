@@ -10,23 +10,27 @@ import * as S from './styles'
 
 interface GoalCondition {
   id: string | number
-  index: number
   name: string
   complete: boolean
 }
 
+//TODO: Slit into 2 arrays "complete" and "incomplete"
+
+const goalConditions: GoalCondition[] = [
+  { id: uuidv4(), name: 'Drink  more wotaa!!', complete: true },
+  { id: uuidv4(), name: 'Drink even more water', complete: false },
+  { id: uuidv4(), name: 'Drink  more wotaa!!', complete: true },
+  { id: uuidv4(), name: 'Drink  more wotaa!!', complete: false },
+  { id: uuidv4(), name: 'Drink  more wotaa!!', complete: false },
+  { id: uuidv4(), name: 'Drink  more wotaa!!', complete: true },
+  { id: uuidv4(), name: 'Drink  more wotaa!!', complete: false },
+]
+
 export const GoalConditions = () => {
-  const [conditions, setConditions] = useState<GoalCondition[]>([
-    { id: uuidv4(), index: 3, name: 'Drink  more wotaa!!', complete: true },
-    { id: uuidv4(), index: 0, name: 'Drink more water', complete: false },
-    { id: uuidv4(), index: 1, name: 'Buy a glass', complete: false },
-    { id: uuidv4(), index: 2, name: 'Drink even more water', complete: false },
-    { id: uuidv4(), index: 3, name: 'Drink  more wotaa!!', complete: true },
-    { id: uuidv4(), index: 4, name: 'Drink  more wotaa!!', complete: false },
-    { id: uuidv4(), index: 5, name: 'Drink  more wotaa!!', complete: false },
-    { id: uuidv4(), index: 3, name: 'Drink  more wotaa!!', complete: true },
-    { id: uuidv4(), index: 6, name: 'Drink  more wotaa!!', complete: false },
-  ])
+  const [conditions, setConditions] = useState<GoalCondition[]>(goalConditions)
+
+  const incompleteConditions = conditions.filter(({ complete }) => !complete)
+  const completeConditions = conditions.filter(({ complete }) => complete)
 
   const handleConditionChange = (conditionId: string | number, event: any) => {
     const conditionsCopy = [...conditions]
@@ -49,24 +53,17 @@ export const GoalConditions = () => {
     setConditions(conditionsCopy)
   }
 
-  const sortConditions = (conditions: GoalCondition[]): GoalCondition[] => {
-    const ConditionsCopy = [...conditions]
-
-    const sortedConditions = ConditionsCopy.sort((goalA: GoalCondition, goalB: GoalCondition) => {
-      if (goalA.complete && !goalB.complete) {
-        return 1
-      }
-      if (!goalA.complete && goalB.complete) {
-        return -1
-      }
-
-      return 0
-    })
-
-    return sortedConditions
-  }
-
-  const conditionsInputs = sortConditions(conditions).map((condition) => (
+  const incompleteConditionsInputs = incompleteConditions.map((condition) => (
+    <ConditionInput
+      key={condition.id}
+      icon={condition.complete ? 'complete' : 'default'}
+      condition={condition}
+      onChange={(e) => handleConditionChange(condition.id, e)}
+      onCheck={(e) => handleConditionCheck(condition.id)}
+      checked={condition.complete}
+    />
+  ))
+  const completeConditionsInputs = completeConditions.map((condition) => (
     <ConditionInput
       key={condition.id}
       icon={condition.complete ? 'complete' : 'default'}
@@ -95,7 +92,8 @@ export const GoalConditions = () => {
         values={conditions}
         onReorder={setConditions}
       >
-        {conditionsInputs}
+        {incompleteConditionsInputs}
+        {completeConditionsInputs}
       </S.GoalConditionsContent>
     </S.GoalConditions>
   )
