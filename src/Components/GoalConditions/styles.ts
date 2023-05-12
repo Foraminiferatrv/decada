@@ -1,6 +1,7 @@
 import styled from 'styled-components'
 import { grayscalePalette, mainPalette } from '../../styles/constants'
 import { Reorder } from 'framer-motion'
+import Fab from '@mui/material/Fab'
 
 export const GoalConditions = styled.section`
   height: 382px;
@@ -11,6 +12,8 @@ export const GoalConditions = styled.section`
   border-radius: 5px;
 
   padding-bottom: 40px;
+
+  position: relative;
 
   overflow: hidden;
 `
@@ -41,4 +44,24 @@ export const GoalConditionsContent = styled(Reorder.Group)`
   gap: 12px;
 
   border: 2px solid ${mainPalette[300]};
+`
+export const AddButton = styled(Fab)`
+  right: 13%;
+  bottom: 6%;
+
+  position: absolute;
+
+  color: ${grayscalePalette[700]};
+
+  &:hover {
+    background: ${mainPalette[100]};
+  }
+
+  &:active {
+    background: ${mainPalette[300]};
+  }
+
+  svg {
+    font-size: 2.5rem;
+  }
 `

@@ -1,26 +1,25 @@
-import DisabledByDefaultRoundedIcon from '@mui/icons-material/DisabledByDefaultRounded'
 import { useDragControls } from 'framer-motion'
 
-import type { IObstacleProps } from './IObstacleInput'
+import type { ISolutionProps } from './ISolutionInput'
 import * as S from './styles'
 import { forwardRef } from 'react'
 
-export const ObstacleInput = forwardRef(
+export const SolutionInput = forwardRef(
   (
-    { obstacle, onChange, onCheck, ...props }: IObstacleProps,
+    { solution, onChange, onCheck, ...props }: ISolutionProps,
     ref: React.ForwardedRef<HTMLInputElement>,
   ) => {
     const controls = useDragControls()
 
     return (
-      <S.ObstacleInput
-        value={obstacle}
+      <S.SolutionInput
+        value={solution}
         layout
         dragListener={false}
         dragControls={controls}
         {...props}
       >
-        <S.LeftSide checked={obstacle.complete}>
+        <S.LeftSide checked={solution.complete}>
           <S.InputDragButton
             onPointerDown={(e: React.PointerEvent<Element>) => controls.start(e)}
           />
@@ -28,18 +27,14 @@ export const ObstacleInput = forwardRef(
         <S.RightSide>
           <S.ToggleInputField
             ref={ref}
-            checked={obstacle.complete}
+            checked={solution.complete}
             type='text'
-            value={obstacle.name}
+            value={solution.name}
             onChange={onChange}
           />
-          <S.InputCheckbox
-            checkedIcon={<DisabledByDefaultRoundedIcon />}
-            checked={obstacle.complete}
-            onClick={onCheck}
-          />
+          <S.InputCheckbox checked={solution.complete} onClick={onCheck} />
         </S.RightSide>
-      </S.ObstacleInput>
+      </S.SolutionInput>
     )
   },
 )

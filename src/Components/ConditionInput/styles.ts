@@ -1,4 +1,4 @@
-import { motion, Reorder } from 'framer-motion'
+import { Reorder } from 'framer-motion'
 import styled from 'styled-components'
 
 import { grayscalePalette, greenPalette, mainPalette } from '../../styles/constants'
@@ -67,7 +67,12 @@ export const ToggleInputField = styled.input`
 
   &:hover {
     background: #fff;
-    border: 1px solid ${mainPalette[500]};
+    border: 1px solid ${mainPalette[500]} !important;
+  }
+
+  &:focus {
+    border: 1px solid ${mainPalette[500]} !important;
+    background: #fff;
   }
 `
 
