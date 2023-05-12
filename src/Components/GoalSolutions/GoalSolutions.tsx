@@ -25,6 +25,7 @@ const goalSolutions: GoalSolution[] = [
 
 export const GoalSolutions = () => {
   const [solutions, setSolutions] = useState<GoalSolution[]>(goalSolutions)
+  const [solutionAdded, setSolutionAdded] = useState<boolean>(false)
 
   const incompleteSolutions = solutions.filter(({ complete }) => !complete)
   const completeSolutions = solutions.filter(({ complete }) => complete)
@@ -56,6 +57,7 @@ export const GoalSolutions = () => {
 
   const addSolution = () => {
     setSolutions([{ id: uuidv4(), name: '', complete: false }, ...solutions])
+    setSolutionAdded(true)
   }
 
   const incompleteSolutionsInputs = incompleteSolutions.map((solution, index) => (
@@ -81,8 +83,11 @@ export const GoalSolutions = () => {
   ))
 
   useEffect(() => {
-    lastSolutionRef.current?.focus()
-  }, [solutions])
+    if (solutionAdded) {
+      lastSolutionRef.current?.focus()
+      setSolutionAdded(false)
+    }
+  }, [solutionAdded])
 
   return (
     <S.GoalSolutions>

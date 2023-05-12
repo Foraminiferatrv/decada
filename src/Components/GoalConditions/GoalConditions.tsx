@@ -27,6 +27,7 @@ const goalConditions: GoalCondition[] = [
 
 export const GoalConditions = () => {
   const [conditions, setConditions] = useState<GoalCondition[]>(goalConditions)
+  const [solutionAdded, setSolutionAdded] = useState<boolean>(false)
 
   const incompleteConditions = conditions.filter(({ complete }) => !complete)
   const completeConditions = conditions.filter(({ complete }) => complete)
@@ -62,6 +63,7 @@ export const GoalConditions = () => {
 
   const addCondition = () => {
     setConditions([{ id: uuidv4(), name: '', complete: false }, ...conditions])
+    setSolutionAdded(true)
   }
 
   const incompleteConditionsInputs = incompleteConditions.map((condition, index) => (
@@ -90,8 +92,11 @@ export const GoalConditions = () => {
   ))
 
   useEffect(() => {
-    lastConditionRef.current?.focus()
-  }, [conditions])
+    if (solutionAdded) {
+      lastConditionRef.current?.focus()
+      setSolutionAdded(false)
+    }
+  }, [solutionAdded])
 
   return (
     <S.GoalConditions>
