@@ -11,7 +11,6 @@ import { Condition } from './IConditionInput'
 
 export const ConditionInput = styled(Reorder.Item)`
   * {
-    color: ${grayscalePalette[600]};
   }
   width: 100%;
   height: 45px;
@@ -55,6 +54,8 @@ export const ToggleInputField = styled.input`
 
   padding: 10px;
 
+  color: ${grayscalePalette[600]};
+
   border: none !important;
   border-radius: 3px;
   outline: none;
@@ -65,12 +66,22 @@ export const ToggleInputField = styled.input`
   font-weight: 600;
 
   &:hover {
-    // outline: 1px solid ${grayscalePalette[500]};
     background: #fff;
-    /* border: 1px solid ${mainPalette[800]}; */
+    border: 1px solid ${mainPalette[500]};
   }
 `
 
 export const InputCheckbox = styled(Checkbox)`
   margin-left: 10px;
+  /* color: ${grayscalePalette[600]}; */
+  ${({ checked }: { checked: boolean }) =>
+    checked
+      ? `color:${greenPalette[700]} !important;
+        &:hover{
+          color:${greenPalette[500]} !important;
+        }
+        `
+      : `color:${grayscalePalette[600]}`}/* svg {
+    color: #fff !important;
+  } */
 `

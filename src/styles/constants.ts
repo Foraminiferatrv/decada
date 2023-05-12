@@ -38,7 +38,7 @@ export const greenPalette = {
 }
 
 export const redPalette = {
-  '50': '#EAF7F4',
+  '50': '#f7eaea',
   '100': '#EAD9DC',
   '200': '#DEA6A8',
   '300': '#D88185',

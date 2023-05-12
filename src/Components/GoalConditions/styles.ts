@@ -3,8 +3,10 @@ import { grayscalePalette, mainPalette } from '../../styles/constants'
 import { Reorder } from 'framer-motion'
 
 export const GoalConditions = styled.section`
-  grid-column: span 5;
   height: 382px;
+
+  grid-column: span 5;
+
   box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.25);
   border-radius: 5px;
 
@@ -32,9 +34,11 @@ export const GoalConditionsHeader = styled.div`
 export const GoalConditionsContent = styled(Reorder.Group)`
   width: 100%;
   height: 100%;
+  padding: 15px;
+
   display: flex;
   flex-direction: column;
   gap: 12px;
 
-  padding: 15px;
+  border: 2px solid ${mainPalette[300]};
 `

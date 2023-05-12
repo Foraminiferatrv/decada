@@ -46,7 +46,7 @@ export const ConditionInput = ({
       <S.InputDragButton onPointerDown={(e: React.PointerEvent<Element>) => controls.start(e)} />
       {inputIcon}
       <S.ToggleInputField type='text' value={condition.name} onChange={onChange} />
-      <S.InputCheckbox checked={condition.complete} onClick={onCheck} />
+      <S.InputCheckbox  checked={condition.complete} onClick={onCheck} />
     </S.ConditionInput>
   )
 }
