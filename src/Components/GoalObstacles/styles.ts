@@ -2,11 +2,14 @@ import styled from 'styled-components'
 import { grayscalePalette, redPalette } from '../../styles/constants'
 import { Reorder } from 'framer-motion'
 
+import Fab from '@mui/material/Fab'
+
 export const GoalObstacles = styled.section`
   height: 382px;
-  /* max-width: 650px; */
 
   grid-column: span 4;
+
+  position: relative;
 
   box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.25);
   border-radius: 5px;
@@ -41,4 +44,25 @@ export const GoalObstaclesContent = styled(Reorder.Group)`
   gap: 12px;
   border: 2px solid ${redPalette[200]};
   padding: 15px;
+`
+
+export const AddButton = styled(Fab)`
+  right: 13%;
+  bottom: 6%;
+
+  position: absolute;
+
+  color: ${grayscalePalette[700]};
+
+  &:hover {
+    background: ${redPalette[100]};
+  }
+
+  &:active {
+    background: ${redPalette[300]};
+  }
+
+  svg {
+    font-size: 2.5rem;
+  }
 `

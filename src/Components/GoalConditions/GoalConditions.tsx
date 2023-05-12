@@ -1,6 +1,6 @@
-import { useState } from 'react'
-
+import { useState, useRef, useEffect } from 'react'
 import { v4 as uuidv4 } from 'uuid'
+import AddRoundedIcon from '@mui/icons-material/AddRounded'
 
 import { ConditionInput } from '../ConditionInput/ConditionInput'
 import { SettingsButton } from '../SettingsButton/SettingsButton'
@@ -31,6 +31,14 @@ export const GoalConditions = () => {
   const incompleteConditions = conditions.filter(({ complete }) => !complete)
   const completeConditions = conditions.filter(({ complete }) => complete)
 
+  const lastConditionRef = useRef<HTMLElement | null>(null)
+
+  const setLastConditionRef = (el: HTMLElement | null) => {
+    if (!el) return
+
+    lastConditionRef.current = el
+  }
+
   const handleConditionChange = (conditionId: string | number, event: any) => {
     const conditionsCopy = [...conditions]
     const targetConditionIndex = conditionsCopy.findIndex(
@@ -52,8 +60,15 @@ export const GoalConditions = () => {
     setConditions(conditionsCopy)
   }
 
-  const incompleteConditionsInputs = incompleteConditions.map((condition) => (
+  const addCondition = () => {
+    setConditions([{ id: uuidv4(), name: '', complete: false }, ...conditions])
+  }
+
+  const incompleteConditionsInputs = incompleteConditions.map((condition, index) => (
     <ConditionInput
+      ref={(ref) => {
+        index === 0 && setLastConditionRef(ref)
+      }}
       key={condition.id}
       icon={condition.complete ? 'complete' : 'default'}
       condition={condition}
@@ -62,6 +77,7 @@ export const GoalConditions = () => {
       checked={condition.complete}
     />
   ))
+
   const completeConditionsInputs = completeConditions.map((condition) => (
     <ConditionInput
       key={condition.id}
@@ -72,6 +88,10 @@ export const GoalConditions = () => {
       checked={condition.complete}
     />
   ))
+
+  useEffect(() => {
+    lastConditionRef.current?.focus()
+  }, [conditions])
 
   return (
     <S.GoalConditions>
@@ -85,7 +105,6 @@ export const GoalConditions = () => {
       </S.GoalConditionsHeader>
       <S.GoalConditionsContent
         axis='y'
-        // layout
         style={{ overflowY: 'scroll' }}
         layoutScroll
         values={conditions}
@@ -94,6 +113,9 @@ export const GoalConditions = () => {
         {incompleteConditionsInputs}
         {completeConditionsInputs}
       </S.GoalConditionsContent>
+      <S.AddButton size='medium' onClick={addCondition}>
+        <AddRoundedIcon />
+      </S.AddButton>
     </S.GoalConditions>
   )
 }
