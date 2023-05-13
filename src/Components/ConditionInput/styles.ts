@@ -6,8 +6,6 @@ import { grayscalePalette, greenPalette, mainPalette } from '../../styles/consta
 import { DragButton } from '../UI/DragButton/DragButton'
 import { Condition } from './IConditionInput'
 
-// import type { IConditionInputProps } from './IConditionInput'
-
 export const ConditionInput = styled(Reorder.Item)`
   * {
   }

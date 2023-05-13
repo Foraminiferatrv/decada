@@ -11,6 +11,7 @@ export const GoalDetails = styled.section`
   height: 382px;
   box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.25);
   border-radius: 5px;
+  background: url(${paper}) fixed repeat;
 `
 
 export const GoalDetailsHeader = styled.div`
@@ -34,8 +35,6 @@ export const GoalDetailsContent = styled.form`
   width: 100%;
 
   padding: 15px;
-
-  background: url(${paper}) fixed repeat;
 
   display: grid;
 
