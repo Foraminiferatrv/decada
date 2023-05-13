@@ -1,9 +1,8 @@
+import Checkbox from '@mui/material/Checkbox'
 import { Reorder } from 'framer-motion'
 import styled from 'styled-components'
 
 import { grayscalePalette, greenPalette, mainPalette } from '../../styles/constants'
-
-import Checkbox from '@mui/material/Checkbox'
 import { DragButton } from '../UI/DragButton/DragButton'
 import { Condition } from './IConditionInput'
 
@@ -20,6 +19,8 @@ export const ConditionInput = styled(Reorder.Item)`
   display: flex;
   align-items: center;
 
+  background: #fff;
+
   border-radius: 5px;
   box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.25);
 
@@ -33,7 +34,14 @@ export const ConditionInput = styled(Reorder.Item)`
       background: ${mainPalette[100]};
     }`}/* transition-duration: 0.3s; */
 `
+export const LeftSide = styled.div`
+  height: 100%;
 
+  display: flex;
+  align-items: center;
+
+  border-radius: 5px 0px 0px 5px;
+`
 export const InputDragButton = styled(DragButton)`
   margin-right: 10px;
 `

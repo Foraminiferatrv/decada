@@ -6,6 +6,8 @@ export interface Solution {
 export interface ISolutionProps {
   checked?: boolean
   solution: Solution
+  isEditable?: boolean
   onChange: (event) => void
   onCheck?: (event) => void
+  onDelete: () => void
 }

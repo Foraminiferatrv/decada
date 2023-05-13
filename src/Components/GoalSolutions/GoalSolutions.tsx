@@ -1,10 +1,10 @@
-import { useRef, useState, useEffect } from 'react'
-import { v4 as uuidv4 } from 'uuid'
+import { useEffect, useRef, useState } from 'react'
+
 import AddRoundedIcon from '@mui/icons-material/AddRounded'
+import { v4 as uuidv4 } from 'uuid'
 
 import { SettingsButton } from '../SettingsButton/SettingsButton'
 import { SolutionInput } from '../SolutionInput/SolutionInput'
-
 import * as S from './styles'
 
 interface GoalSolution {
@@ -25,7 +25,8 @@ const goalSolutions: GoalSolution[] = [
 
 export const GoalSolutions = () => {
   const [solutions, setSolutions] = useState<GoalSolution[]>(goalSolutions)
-  const [solutionAdded, setSolutionAdded] = useState<boolean>(false)
+  const [solutionAdded, setSolutionAdded] = useState(false)
+  const [isEditable, setIsEditable] = useState(false)
 
   const incompleteSolutions = solutions.filter(({ complete }) => !complete)
   const completeSolutions = solutions.filter(({ complete }) => complete)
@@ -60,6 +61,15 @@ export const GoalSolutions = () => {
     setSolutionAdded(true)
   }
 
+  const deleteSolution = (solution: GoalSolution) => {
+    const solutionsCopy = [...solutions]
+    const targetIndex = solutionsCopy.indexOf(solution)
+
+    solutionsCopy.splice(targetIndex, 1)
+
+    setSolutions(solutionsCopy)
+  }
+
   const incompleteSolutionsInputs = incompleteSolutions.map((solution, index) => (
     <SolutionInput
       ref={(ref) => {
@@ -67,8 +77,10 @@ export const GoalSolutions = () => {
       }}
       key={solution.id}
       solution={solution}
+      isEditable={isEditable}
       onChange={(e) => handleSolutionChange(solution.id, e)}
       onCheck={(e) => handleSolutionCheck(solution.id)}
+      onDelete={() => deleteSolution(solution)}
       checked={solution.complete}
     />
   ))
@@ -76,8 +88,10 @@ export const GoalSolutions = () => {
     <SolutionInput
       key={solution.id}
       solution={solution}
+      isEditable={isEditable}
       onChange={(e) => handleSolutionChange(solution.id, e)}
       onCheck={(e) => handleSolutionCheck(solution.id)}
+      onDelete={() => deleteSolution(solution)}
       checked={solution.complete}
     />
   ))
@@ -94,7 +108,7 @@ export const GoalSolutions = () => {
       <S.GoalSolutionsHeader>
         <SettingsButton
           onClick={() => {
-            return null
+            setIsEditable(!isEditable)
           }}
         />
         <span>Solutions</span>

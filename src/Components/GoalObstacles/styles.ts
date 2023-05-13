@@ -1,8 +1,9 @@
-import styled from 'styled-components'
-import { grayscalePalette, redPalette } from '../../styles/constants'
-import { Reorder } from 'framer-motion'
-
 import Fab from '@mui/material/Fab'
+import { Reorder } from 'framer-motion'
+import styled from 'styled-components'
+
+import paper from '../../assets/img/paper.png'
+import { grayscalePalette, redPalette } from '../../styles/constants'
 
 export const GoalObstacles = styled.section`
   height: 382px;
@@ -39,11 +40,15 @@ export const GoalObstaclesHeader = styled.div`
 export const GoalObstaclesContent = styled(Reorder.Group)`
   width: 100%;
   height: 100%;
+  
   display: flex;
   flex-direction: column;
+  
   gap: 12px;
   border: 2px solid ${redPalette[200]};
   padding: 15px;
+  
+  background: url(${paper}) fixed repeat;
 `
 
 export const AddButton = styled(Fab)`

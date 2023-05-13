@@ -1,12 +1,15 @@
-import * as S from './styles'
+import { forwardRef } from 'react'
+
+import DeleteForeverRoundedIcon from '@mui/icons-material/DeleteForeverRounded'
+import IconButton from '@mui/material/IconButton'
+import { useDragControls } from 'framer-motion'
 
 import type { IConditionInputProps } from './IConditionInput'
-import { useDragControls } from 'framer-motion'
-import { forwardRef } from 'react'
+import * as S from './styles'
 
 export const ConditionInput = forwardRef(
   (
-    { icon, condition, onChange, onCheck, ...props }: IConditionInputProps,
+    { icon, condition, isEditable, onChange, onCheck, onDelete, ...props }: IConditionInputProps,
     ref: React.ForwardedRef<HTMLInputElement>,
   ) => {
     const controls = useDragControls()
@@ -42,9 +45,18 @@ export const ConditionInput = forwardRef(
         dragControls={controls}
         {...props}
       >
-        <S.InputDragButton onPointerDown={(e: React.PointerEvent<Element>) => controls.start(e)} />
-        {inputIcon}
+        <S.LeftSide>
+          <S.InputDragButton
+            onPointerDown={(e: React.PointerEvent<Element>) => controls.start(e)}
+          />
+          {inputIcon}
+        </S.LeftSide>
         <S.ToggleInputField ref={ref} type='text' value={condition.name} onChange={onChange} />
+        {isEditable && (
+          <IconButton color='error' onClick={onDelete}>
+            <DeleteForeverRoundedIcon />
+          </IconButton>
+        )}
         <S.InputCheckbox checked={condition.complete} onClick={onCheck} />
       </S.ConditionInput>
     )
