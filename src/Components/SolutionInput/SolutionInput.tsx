@@ -1,12 +1,15 @@
+import { forwardRef } from 'react'
+
+import DeleteForeverRoundedIcon from '@mui/icons-material/DeleteForeverRounded'
+import IconButton from '@mui/material/IconButton'
 import { useDragControls } from 'framer-motion'
 
 import type { ISolutionProps } from './ISolutionInput'
 import * as S from './styles'
-import { forwardRef } from 'react'
 
 export const SolutionInput = forwardRef(
   (
-    { solution, onChange, onCheck, ...props }: ISolutionProps,
+    { solution, isEditable, onChange, onCheck, onDelete, ...props }: ISolutionProps,
     ref: React.ForwardedRef<HTMLInputElement>,
   ) => {
     const controls = useDragControls()
@@ -32,6 +35,11 @@ export const SolutionInput = forwardRef(
             value={solution.name}
             onChange={onChange}
           />
+          {isEditable && (
+            <IconButton color='error' onClick={onDelete}>
+              <DeleteForeverRoundedIcon />
+            </IconButton>
+          )}
           <S.InputCheckbox checked={solution.complete} onClick={onCheck} />
         </S.RightSide>
       </S.SolutionInput>

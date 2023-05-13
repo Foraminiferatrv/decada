@@ -1,14 +1,14 @@
-import { useRef, useState, useEffect } from 'react'
-import { v4 as uuidv4 } from 'uuid'
+import { useEffect, useRef, useState } from 'react'
+
 import AddRoundedIcon from '@mui/icons-material/AddRounded'
+import { v4 as uuidv4 } from 'uuid'
 
-import { SettingsButton } from '../SettingsButton/SettingsButton'
 import { ObstacleInput } from '../ObstaclesInput/ObstacleInput'
-
+import { SettingsButton } from '../SettingsButton/SettingsButton'
 import * as S from './styles'
 
 interface GoalObstacle {
-  id: string | number
+  id: string
   name: string
   complete: boolean
 }
@@ -27,6 +27,8 @@ export const GoalObstacles = () => {
   const [obstacles, setObstacles] = useState<GoalObstacle[]>(goalObstacles)
   const [obstacleAdded, setObstacleAdded] = useState<boolean>(false)
 
+  const [isEditable, setIsEditable] = useState(false)
+
   const incompleteObstacles = obstacles.filter(({ complete }) => !complete)
   const completeObstacles = obstacles.filter(({ complete }) => complete)
 
@@ -38,7 +40,7 @@ export const GoalObstacles = () => {
     lastObstacleRef.current = el
   }
 
-  const handleObstacleChange = (obstacleId: string | number, event: any) => {
+  const handleObstacleChange = (obstacleId: string, event: any) => {
     const obstaclesCopy = [...obstacles]
     const targetObstacleIndex = obstaclesCopy.findIndex((obstacle) => obstacle.id === obstacleId)
     obstaclesCopy[targetObstacleIndex].name = event.target.value
@@ -46,7 +48,7 @@ export const GoalObstacles = () => {
     setObstacles(obstaclesCopy)
   }
 
-  const handleObstacleCheck = (obstacleId: string | number) => {
+  const handleObstacleCheck = (obstacleId: string) => {
     const obstaclesCopy = [...obstacles]
     const targetObstacleIndex = obstaclesCopy.findIndex((obstacle) => obstacle.id === obstacleId)
 
@@ -60,15 +62,27 @@ export const GoalObstacles = () => {
     setObstacleAdded(true)
   }
 
+  const deleteObstacles = (obstacle: GoalObstacle) => {
+    const obstaclesCopy = [...obstacles]
+
+    const targetIndex = obstaclesCopy.indexOf(obstacle)
+
+    obstaclesCopy.splice(targetIndex, 1)
+
+    setObstacles(obstaclesCopy)
+  }
+
   const incompleteObstaclesInputs = incompleteObstacles.map((obstacle, index) => (
     <ObstacleInput
       ref={(ref) => {
         index === 0 && setLastObstacleRef(ref)
       }}
+      isEditable={isEditable}
       key={obstacle.id}
       obstacle={obstacle}
       onChange={(e) => handleObstacleChange(obstacle.id, e)}
       onCheck={(e) => handleObstacleCheck(obstacle.id)}
+      onDelete={() => deleteObstacles(obstacle)}
       checked={obstacle.complete}
     />
   ))
@@ -76,7 +90,9 @@ export const GoalObstacles = () => {
     <ObstacleInput
       key={obstacle.id}
       obstacle={obstacle}
+      isEditable={isEditable}
       onChange={(e) => handleObstacleChange(obstacle.id, e)}
+      onDelete={() => deleteObstacles(obstacle)}
       onCheck={(e) => handleObstacleCheck(obstacle.id)}
       checked={obstacle.complete}
     />
@@ -94,7 +110,7 @@ export const GoalObstacles = () => {
       <S.GoalObstaclesHeader>
         <SettingsButton
           onClick={() => {
-            return null
+            setIsEditable(!isEditable)
           }}
         />
         <span>Obstacles</span>

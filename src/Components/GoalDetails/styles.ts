@@ -1,9 +1,10 @@
 import styled from 'styled-components'
 
+import paper from '../../assets/img/paper.png'
 import { grayscalePalette, mainPalette } from '../../styles/constants'
-import { ToggleInput } from '../ToggleInput/ToggleInput'
 import { FavoriteButton } from '../FavoriteButton/FavoriteButton'
 import { ProgressBar } from '../ProgressBar/ProgressBar'
+import { ToggleInput } from '../ToggleInput/ToggleInput'
 
 export const GoalDetails = styled.section`
   grid-column: span 3;
@@ -33,6 +34,8 @@ export const GoalDetailsContent = styled.form`
   width: 100%;
 
   padding: 15px;
+
+  background: url(${paper}) fixed repeat;
 
   display: grid;
 

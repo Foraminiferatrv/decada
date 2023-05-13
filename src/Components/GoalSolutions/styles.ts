@@ -1,7 +1,8 @@
-import styled from 'styled-components'
-import { Reorder } from 'framer-motion'
 import Fab from '@mui/material/Fab'
+import { Reorder } from 'framer-motion'
+import styled from 'styled-components'
 
+import paper from '../../assets/img/paper.png'
 import { grayscalePalette, greenPalette } from '../../styles/constants'
 
 export const GoalSolutions = styled.section`
@@ -38,11 +39,15 @@ export const GoalSolutionsHeader = styled.div`
 export const GoalSolutionsContent = styled(Reorder.Group)`
   width: 100%;
   height: 100%;
+
   display: flex;
   flex-direction: column;
   gap: 12px;
+
   border: 2px solid ${greenPalette[200]};
   padding: 15px;
+
+  background: url(${paper}) fixed repeat;
 `
 export const AddButton = styled(Fab)`
   right: 13%;

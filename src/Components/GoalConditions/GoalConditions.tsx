@@ -1,14 +1,14 @@
-import { useState, useRef, useEffect } from 'react'
-import { v4 as uuidv4 } from 'uuid'
+import { useEffect, useRef, useState } from 'react'
+
 import AddRoundedIcon from '@mui/icons-material/AddRounded'
+import { v4 as uuidv4 } from 'uuid'
 
 import { ConditionInput } from '../ConditionInput/ConditionInput'
 import { SettingsButton } from '../SettingsButton/SettingsButton'
-
 import * as S from './styles'
 
 interface GoalCondition {
-  id: string | number
+  id: string
   name: string
   complete: boolean
 }
@@ -28,6 +28,7 @@ const goalConditions: GoalCondition[] = [
 export const GoalConditions = () => {
   const [conditions, setConditions] = useState<GoalCondition[]>(goalConditions)
   const [solutionAdded, setSolutionAdded] = useState<boolean>(false)
+  const [isEditable, setIsEditable] = useState(false)
 
   const incompleteConditions = conditions.filter(({ complete }) => !complete)
   const completeConditions = conditions.filter(({ complete }) => complete)
@@ -40,7 +41,7 @@ export const GoalConditions = () => {
     lastConditionRef.current = el
   }
 
-  const handleConditionChange = (conditionId: string | number, event: any) => {
+  const handleConditionChange = (conditionId: string, event: any) => {
     const conditionsCopy = [...conditions]
     const targetConditionIndex = conditionsCopy.findIndex(
       (condition) => condition.id === conditionId,
@@ -50,7 +51,7 @@ export const GoalConditions = () => {
     setConditions(conditionsCopy)
   }
 
-  const handleConditionCheck = (conditionId: string | number) => {
+  const handleConditionCheck = (conditionId: string) => {
     const conditionsCopy = [...conditions]
     const targetConditionIndex = conditionsCopy.findIndex(
       (condition) => condition.id === conditionId,
@@ -66,16 +67,27 @@ export const GoalConditions = () => {
     setSolutionAdded(true)
   }
 
+  const deleteCondition = (condition: GoalCondition) => {
+    const conditionsCopy = [...conditions]
+    const targetIndex = conditionsCopy.indexOf(condition)
+
+    conditionsCopy.splice(targetIndex, 1)
+
+    setConditions(conditionsCopy)
+  }
+
   const incompleteConditionsInputs = incompleteConditions.map((condition, index) => (
     <ConditionInput
       ref={(ref) => {
         index === 0 && setLastConditionRef(ref)
       }}
+      isEditable={isEditable}
       key={condition.id}
       icon={condition.complete ? 'complete' : 'default'}
       condition={condition}
       onChange={(e) => handleConditionChange(condition.id, e)}
       onCheck={(e) => handleConditionCheck(condition.id)}
+      onDelete={() => deleteCondition(condition)}
       checked={condition.complete}
     />
   ))
@@ -85,8 +97,10 @@ export const GoalConditions = () => {
       key={condition.id}
       icon={condition.complete ? 'complete' : 'default'}
       condition={condition}
+      isEditable={isEditable}
       onChange={(e) => handleConditionChange(condition.id, e)}
       onCheck={(e) => handleConditionCheck(condition.id)}
+      onDelete={() => deleteCondition(condition)}
       checked={condition.complete}
     />
   ))
@@ -103,7 +117,7 @@ export const GoalConditions = () => {
       <S.GoalConditionsHeader>
         <SettingsButton
           onClick={() => {
-            return null
+            setIsEditable(!isEditable)
           }}
         />
         <span>Conditions</span>

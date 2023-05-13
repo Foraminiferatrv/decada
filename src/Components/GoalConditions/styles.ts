@@ -1,7 +1,9 @@
-import styled from 'styled-components'
-import { grayscalePalette, mainPalette } from '../../styles/constants'
-import { Reorder } from 'framer-motion'
 import Fab from '@mui/material/Fab'
+import { Reorder } from 'framer-motion'
+import styled from 'styled-components'
+
+import paper from '../../assets/img/paper.png'
+import { grayscalePalette, mainPalette } from '../../styles/constants'
 
 export const GoalConditions = styled.section`
   height: 382px;
@@ -44,6 +46,8 @@ export const GoalConditionsContent = styled(Reorder.Group)`
   gap: 12px;
 
   border: 2px solid ${mainPalette[300]};
+
+  background: url(${paper}) fixed repeat;
 `
 export const AddButton = styled(Fab)`
   right: 13%;
