@@ -81,6 +81,8 @@ export const grayscalePalette = {
   '900': '#010101',
 }
 
+export const errorColor = '#EF5350'
+
 export const mainContentWidth = '966px'
 
 export const breakpoints = {}
