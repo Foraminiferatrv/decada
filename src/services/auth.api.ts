@@ -1,12 +1,12 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 
-import { I_UserLogIn, I_UserSignUp } from '../types/user'
+import { I_UserLogInReq, I_UserRes, I_UserSignUpReq } from '../interfaces/user'
 
-const baseUrl = import.meta.env.VITE_BASE_URL
+const BASE_URL = import.meta.env.VITE_BASE_URL
 
 export const authApi = createApi({
   reducerPath: 'authApi',
-  baseQuery: fetchBaseQuery({ baseUrl: baseUrl }),
+  baseQuery: fetchBaseQuery({ baseUrl: BASE_URL }),
   tagTypes: ['Auth'],
   endpoints: (builder) => ({
     healthCheck: builder.query<void, void>({
@@ -15,7 +15,14 @@ export const authApi = createApi({
         method: 'GET',
       }),
     }),
-    logIn: builder.mutation<string, I_UserLogIn>({
+    checkAuth: builder.query<void, void>({
+      query: () => ({
+        url: 'auth/',
+        method: 'GET',
+        credentials: 'include',
+      }),
+    }),
+    logIn: builder.mutation<I_UserRes, I_UserLogInReq>({
       query: (body) => ({
         url: 'auth/login',
         credentials: 'include',
@@ -23,7 +30,7 @@ export const authApi = createApi({
         body,
       }),
     }),
-    signIn: builder.mutation<string, I_UserSignUp>({
+    signIn: builder.mutation<string, I_UserSignUpReq>({
       query: (body) => ({
         url: 'users/register',
         credentials: 'include',

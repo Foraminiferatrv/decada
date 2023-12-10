@@ -1,5 +1,6 @@
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
+import { toast } from 'react-toastify'
 
 import EmailRoundedIcon from '@mui/icons-material/EmailRounded'
 import KeyRoundedIcon from '@mui/icons-material/KeyRounded'
@@ -7,7 +8,10 @@ import InputAdornment from '@mui/material/InputAdornment'
 
 import GoogleIcon from '../../../assets/img/icons/google-icon.svg'
 import { ROUTES } from '../../../constants/routes'
+import { useStoreDispatch } from '../../../hooks/useStore'
 import { authApi } from '../../../services/auth.api'
+import { setIsAuthenticated } from '../../../store/slices/auth.slice'
+import { setMeInfo } from '../../../store/slices/me.slice'
 import * as S from './styles'
 
 interface I_LoginInput {
@@ -17,6 +21,7 @@ interface I_LoginInput {
 
 export const Login = () => {
   const [logIn, { isSuccess, isError, isLoading }] = authApi.useLogInMutation()
+  const dispatch = useStoreDispatch()
 
   const {
     register,
@@ -28,6 +33,16 @@ export const Login = () => {
 
   const onSubmit: SubmitHandler<I_LoginInput> = (data): void => {
     logIn(data)
+      .unwrap()
+      .then((userData) => {
+        dispatch(setMeInfo(userData))
+        dispatch(setIsAuthenticated(true))
+        navigate(ROUTES.PLAN)
+      })
+      .catch((error) => {
+        console.error(error)
+        toast.error('Invalid e-mail or password.')
+      })
   }
 
   const handleCreateAccount = (): void => {
