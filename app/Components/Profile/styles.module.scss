@@ -1,0 +1,16 @@
+@use '../../styles/variables' as v;
+
+.Profile {
+  width: 35px;
+  height: 35px;
+
+  background: map-get(v.$mainPalette, 800);
+  border-radius: 4px;
+
+  cursor: pointer;
+}
+
+.ProfilePhoto {
+  width: 100%;
+  height: 100%;
+}

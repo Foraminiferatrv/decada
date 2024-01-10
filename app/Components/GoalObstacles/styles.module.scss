@@ -1,0 +1,68 @@
+@use '../../styles/variables' as v;
+
+.GoalObstacles {
+  height: 382px;
+
+  grid-column: span 4;
+
+  position: relative;
+
+  box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 5px;
+  padding-bottom: 40px;
+
+  overflow: hidden;
+}
+
+.GoalObstaclesHeader {
+  width: 100%;
+  height: 40px;
+
+  border-radius: 4px 4px 0 0;
+
+  padding: 0 35px 0 10px;
+
+  color: v.getGrayscale(600);
+  font-weight: 600;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  border-radius: 5px 5px 0 0;
+  background: v.getRedPalette(200);
+}
+.GoalObstaclesContent {
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+  flex-direction: column;
+
+  gap: 12px;
+  border: 2px solid v.getRedPalette(200);
+  padding: 15px;
+
+  background: url('../../assets/img/paper.png') fixed repeat;
+}
+
+.AddButton {
+  right: 13%;
+  bottom: 6%;
+
+  position: absolute;
+
+  color: v.getGrayscale(600);
+
+  &:hover {
+    background: v.getRedPalette(100);
+  }
+
+  &:active {
+    background: v.getRedPalette(300);
+  }
+
+  svg {
+    font-size: 2.5rem;
+  }
+}

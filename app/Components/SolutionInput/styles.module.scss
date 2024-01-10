@@ -1,0 +1,127 @@
+@use '../../styles/variables' as v;
+
+.SolutionInput {
+  width: 100%;
+  height: 45px;
+
+  position: relative;
+
+  display: flex;
+  align-items: center;
+
+  background: v.getGreen(100);
+
+  border-radius: 5px;
+  box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.25);
+
+  &:hover {
+    background: v.getGreen(200);
+  }
+
+  @keyframes cross {
+    from {
+      width: 0;
+    }
+    to {
+      width: 90%;
+    }
+  }
+}
+
+.InputComplete {
+  background: v.getGrayscale(50);
+
+  &:hover {
+    background: v.getGrayscale(50);
+  }
+  &::before {
+    position: absolute;
+    content: '';
+    width: 90%;
+    left: 20px;
+    top: 50%;
+    animation: cross 100ms;
+    border-top: 2px solid v.getGrayscale(600);
+  }
+}
+
+.LeftSide {
+  height: 100%;
+  padding: 10px;
+
+  display: flex;
+  align-items: center;
+
+  /* background: #e86466; */
+  border-radius: 5px 0px 0px 5px;
+
+  // ${({ checked }: { checked: boolean }) =>
+  // `background:${checked ? grayscalePalette[400] : redPalette[400]}`}
+  background: v.getGreen(400);
+}
+
+.Complete {
+  background: v.getGrayscale(400);
+  color: v.getGrayscale(400);
+}
+
+.RightSide {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+
+  padding: 10px;
+}
+
+.InputDragButton {
+  display: flex;
+  align-items: center;
+  margin-right: 10px;
+}
+
+.ToggleInputField {
+  width: 100%;
+  height: 100%;
+
+  padding: 10px;
+  color: getGrayscale(400);
+
+  // ${({ checked }: { checked: boolean }) =>
+  //   `color:${checked ? grayscalePalette[400] : grayscalePalette[600]};
+
+  //   `}
+
+  /* color: ${grayscalePalette[600]}; */
+
+  border: none !important;
+  border-radius: 3px;
+  outline: none;
+
+  background: none;
+
+  font-size: 15px;
+  font-weight: 600;
+
+  &:hover {
+    background: #fff;
+    border: 1px solid v.getMainPalette(500) !important;
+  }
+
+  &:focus {
+    border: 1px solid v.getMainPalette(500) !important;
+    background: #fff;
+  }
+}
+
+.InputCheckbox {
+  margin-left: 10px;
+
+  color: v.getGrayscale(600);
+}
+.InputCheckboxChecked {
+  color: v.getGrayscale(600) !important;
+  &:hover {
+    color: v.getGrayscale(400) !important;
+  }
+}

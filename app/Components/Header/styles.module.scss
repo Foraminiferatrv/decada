@@ -1,0 +1,40 @@
+@use '../../styles/variables' as v;
+
+.Header {
+  width: 100%;
+  height: 56px;
+
+  display: flex;
+  justify-content: center;
+
+  background-color: map-get(v.$mainPalette, 100);
+  // background-color: v.$mainPalette(100);
+
+  padding: 0 20px;
+}
+// @debug $mainPalette(100);
+
+.HeaderWrapper {
+  width: 100%;
+  max-width: v.$mainContentWidth;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.LogoWrapper {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+}
+
+.ProfileWrapper {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+.ButtonsWrapper {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}

@@ -1,0 +1,108 @@
+@use '../../styles/variables' as v;
+
+.ConditionInput {
+  width: 100%;
+  height: 45px;
+
+  padding: 10px;
+
+  display: flex;
+  align-items: center;
+
+  background: #fff;
+
+  border-radius: 5px;
+  box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.25);
+
+  background: map-get(v.$mainPalette, 100);
+
+  // ${({ value }: { value: Condition }) =>
+  //   value.complete
+  //     ? `background: ${greenPalette[100]};
+  //   &:hover {
+  //     background: ${greenPalette[50]};
+  //   }`
+  //     : `&:hover {
+  //     background: ${mainPalette[100]};
+  //   }`}/* transition-duration: 0.3s; */
+}
+
+.ConditionInputComplete {
+  background: map-get(v.$greenPalette, 100);
+
+  &:hover {
+    background: map-get(v.$greenPalette, 50);
+  }
+}
+
+.LeftSide {
+  height: 100%;
+
+  display: flex;
+  align-items: center;
+
+  border-radius: 5px 0px 0px 5px;
+}
+.InputDragButton {
+  margin-right: 10px;
+}
+
+.InputIcon {
+  max-width: 23px;
+  min-height: 23px;
+
+  margin-right: 5px;
+
+  display: flex;
+  align-items: center;
+}
+
+.ToggleInputField {
+  width: 100%;
+  height: 100%;
+
+  padding: 10px;
+
+  // color: ${grayscalePalette[600]};
+  color: map-get(v.$grayscalePalette, 600);
+
+  border: none !important;
+  border-radius: 3px;
+  outline: none;
+
+  background: none;
+
+  font-size: 15px;
+  font-weight: 600;
+
+  &:hover {
+    background: #fff;
+    // border: 1px solid ${mainPalette[500]} !important;
+    border: 1px solid map-get(v.$mainPalette, 500) !important;
+  }
+
+  &:focus {
+    // border: 1px solid ${mainPalette[500]} !important;
+    border: 1px solid map-get(v.$mainPalette, 500) !important;
+
+    background: #fff;
+  }
+}
+
+.InputCheckbox {
+  margin-left: 10px;
+  /* color: ${grayscalePalette[600]}; */
+  color: map-get(v.$grayscalePalette, 600) !important;
+
+  /* svg {
+    color: #fff !important;
+  } */
+}
+
+.InputCheckboxChecked {
+  color: map-get(v.$greenPalette, 700) !important;
+
+  &:hover {
+    color: map-get(v.$greenPalette, 500) !important;
+  }
+}

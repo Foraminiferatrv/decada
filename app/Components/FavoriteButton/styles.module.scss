@@ -1,0 +1,43 @@
+@use '../../styles/variables' as v;
+
+.FavoriteButton {
+  height: 50px;
+  width: 50px;
+
+  &:hover {
+    background: none;
+  }
+
+  svg {
+    // ${(props: IFavoriteButtonProps) =>
+    //   props.$isFavorite ? `` : `color: transparent;`}
+    color: transparent;
+    stroke: v.getMainPalette(900);
+    height: 50px;
+    width: 50px;
+
+    transition-duration: 0.5s;
+
+    &:hover {
+      color: v.getMainPalette(500);
+    }
+    // ${(props: IFavoriteButtonProps) =>
+    //   props.$isFavorite ? `` : `color: ${mainPalette[200]};;`}
+
+    filter: drop-shadow(0 0 3px v.getMainPalette(600));
+  }
+
+  &:focus {
+    outline: none;
+  }
+}
+
+.IsFavorite {
+  svg {
+    color: v.getMainPalette(800);
+  }
+
+  &:hover {
+    color: v.getMainPalette(700);
+  }
+}
