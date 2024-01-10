@@ -1,4 +1,4 @@
-import AppRouterCacheProvider from '@mui/material-nextjs/v14-appRouter/AppRouterCacheProvider'
+import { AppRouterCacheProvider } from '@mui/material-nextjs/build/v14-appRouter'
 
 import './styles/global.css'
 
@@ -7,6 +7,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html>
       <body>
         <AppRouterCacheProvider>{children}</AppRouterCacheProvider>
+        {/* {children} */}
       </body>
     </html>
   )

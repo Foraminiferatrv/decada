@@ -21,10 +21,10 @@ dependencies:
     specifier: ^5.11.16
     version: 5.15.4(@mui/material@5.15.4)(@types/react@18.2.47)(react@18.2.0)
   '@mui/material':
-    specifier: ^5.12.3
+    specifier: ^5.15.3
     version: 5.15.4(@emotion/react@11.11.3)(@emotion/styled@11.11.0)(@types/react@18.2.47)(react-dom@18.2.0)(react@18.2.0)
   '@mui/material-nextjs':
-    specifier: ^5.15.4
+    specifier: ^5.15.3
     version: 5.15.4(@emotion/cache@11.11.0)(@mui/material@5.15.4)(@types/react@18.2.47)(next@14.0.4)(react@18.2.0)
   '@mui/styled-engine-sc':
     specifier: ^5.12.0
