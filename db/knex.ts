@@ -1,4 +1,4 @@
-import knex from 'knex'
+import knex, { type Knex } from 'knex'
 import knexfile from './knexfile'
 
 /**
@@ -7,10 +7,15 @@ import knexfile from './knexfile'
  *
  * see https://github.com/vercel/next.js/discussions/12229#discussioncomment-83372
  */
-let cached = global.pg
-if (!cached) cached = global.pg = {}
+// let cached = global.pg
+// if (!cached) cached = global.pg = {}
 
-export function getKnex() {
-  if (!cached.instance) cached.instance = knex(knexfile)
-  return cached.instance
+// export function getKnex<T>(): Knex {
+//   if (!cached.instance) cached.instance = knex<T>(knexfile)
+//   return cached.instance
+// }
+
+export function getKnex<T>(): Knex {
+  const knexInstance = knex<any, T[]>(knexfile)
+  return knexInstance
 }

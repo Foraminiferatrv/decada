@@ -3,10 +3,10 @@ import { Inter } from 'next/font/google'
 // import ' /globals.css'
 import React, { ReactNode } from 'react'
 
-import { Header } from '../Components/Header/Header'
+import { Header } from '../../Components/Header/Header'
 
 import S from './styles.module.scss'
-import { Navbar } from '../Components/Navbar/Navbar'
+import { Navbar } from '../../Components/Navbar/Navbar'
 
 type T_MainLayoutProps = {
   children: ReactNode

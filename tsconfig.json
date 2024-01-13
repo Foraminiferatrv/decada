@@ -29,6 +29,15 @@
       "@app": [
         "./app"
       ],
+      "@assets": [
+        "./assets"
+      ],
+      "@components": [
+        "./components"
+      ],
+      "@constants": [
+        "./constants"
+      ],
       "@db": [
         "./db"
       ]
