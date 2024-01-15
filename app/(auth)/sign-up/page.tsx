@@ -36,6 +36,7 @@ type SignUpInput = { name: string; email: string; password: string; repeatPasswo
 
 export default function SignUp() {
   const [isPasswordVisible, setIsPasswordVisible] = useState<boolean>(false)
+  const [error, setError] = useState<string | null>(null)
 
   const singUpSchema = yup.object({
     name: yup.string().required('name is required.').max(100),
@@ -63,7 +64,12 @@ export default function SignUp() {
   const [isPending, startTransition] = useTransition()
 
   const onSubmit: SubmitHandler<SignUpInput> = (data): void => {
-    startTransition(() => signUp(data).then((result) => console.log({ result })))
+    startTransition(() =>
+      signUp(data).then((res) => {
+        if (res.error) setError(res.error)
+        console.log({ res })
+      }),
+    )
     // startTransition(() => logIn(data))
     // SignIn(data)
     //   .unwrap()
@@ -106,7 +112,13 @@ export default function SignUp() {
             icon={EmailRoundedIcon}
             disabled={isPending}
             isError={!!errors.email}
-            {...register('email', { required: true })}
+            {...register('email', {
+              required: true,
+              onChange: (e) => {
+                setError(null)
+                return e
+              },
+            })}
             type='email'
           />
           <Input
@@ -114,7 +126,10 @@ export default function SignUp() {
             icon={KeyRoundedIcon}
             disabled={isPending}
             isError={!!errors.password}
-            {...register('password', { required: true, minLength: 4 })}
+            {...register('password', {
+              required: true,
+              minLength: 4,
+            })}
             type='password'
           />
           <Input
@@ -144,6 +159,7 @@ export default function SignUp() {
         {errors.repeatPassword && (
           <span className='text-center text-red-600'>{errors.repeatPassword.message}</span>
         )}
+        {error && <span className='text-center text-red-600'>{error}</span>}
 
         <span className='h-[2px]  w-full rounded-full bg-customGrayscale-300' />
         <button

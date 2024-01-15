@@ -7,7 +7,8 @@ const nextConfig = {
     includePaths: [path.join(__dirname, 'styles')],
   },
   experimental: {
-    serverComponentsExternalPackages: ['knex', 'oracledb'],
+    // serverComponentsExternalPackages: ['knex', 'oracledb'],
+    serverComponentsExternalPackages: ['kysely'],
   },
 }
 
