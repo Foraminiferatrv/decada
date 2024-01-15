@@ -2,8 +2,8 @@ export const ROUTES = {
   ALL: '*',
   ROOT: '/',
 
-  LOGIN: '/login',
-  SIGN_UP: '/signup',
+  LOGIN: '/log-in',
+  SIGN_UP: '/sign-up',
 
   PLAN: '/plan',
 

@@ -1,3 +1,5 @@
+"use server"
+
 require('ts-node/register')
 
 import { loadEnvConfig } from '@next/env'

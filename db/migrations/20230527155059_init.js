@@ -7,7 +7,7 @@ exports.up = function up(knex) {
     table.uuid('user_id').unique().primary().notNullable()
     table.string('email').unique().notNullable()
     table.string('password').notNullable()
-    table.string('username').notNullable()
+    table.string('name').notNullable()
     table.string('image').defaultTo('')
     table.timestamps(true, true)
   })

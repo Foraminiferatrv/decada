@@ -1,11 +1,14 @@
-import React, { InputHTMLAttributes, JSXElementConstructor } from 'react'
+import React, { InputHTMLAttributes, JSXElementConstructor, Ref } from 'react'
 
 type TInputProps = {
   icon?: JSXElementConstructor<any>
   isError?: boolean
 } & InputHTMLAttributes<HTMLInputElement>
 
-export const Input = ({ icon: Icon, isError, ...props }: TInputProps) => {
+export const InputComponent = (
+  { icon: Icon, isError, ...props }: TInputProps,
+  ref: Ref<HTMLInputElement>,
+) => {
   return (
     <div
       className={`relative flex items-center border ${
@@ -19,8 +22,11 @@ export const Input = ({ icon: Icon, isError, ...props }: TInputProps) => {
         }`}
         placeholder='Enter your e-mail'
         type='email'
+        ref={ref}
         {...props}
       />
     </div>
   )
 }
+
+export const Input = React.forwardRef(InputComponent)

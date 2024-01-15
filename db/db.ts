@@ -1,13 +1,11 @@
 import knex, { type Knex } from 'knex'
 import knexfile from './knexfile'
 
-/**
- * Global is used here to ensure the connection
- * is cached across hot-reloads in development
- *
- * see https://github.com/vercel/next.js/discussions/12229#discussioncomment-83372
- */
-// let cached = global.pg
+declare global {
+  var knex: Knex | undefined
+}
+
+export const db = globalThis.knex || knex(knexfile)
 // if (!cached) cached = global.pg = {}
 
 // export function getKnex<T>(): Knex {
@@ -19,3 +17,5 @@ export function getKnex<T>(): Knex {
   const knexInstance = knex<any, T[]>(knexfile)
   return knexInstance
 }
+
+if (process.env.NODE_ENV !== 'production') globalThis.knex = db

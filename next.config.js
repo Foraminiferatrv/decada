@@ -1,14 +1,20 @@
 const path = require('path')
+const withSvgr = require('next-plugin-svgr')
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  // compiler: { styledComponents: true },
   sassOptions: {
     includePaths: [path.join(__dirname, 'styles')],
   },
   experimental: {
-    serverComponentsExternalPackages: ['knex'],
+    serverComponentsExternalPackages: ['knex', 'oracledb'],
   },
 }
 
 module.exports = nextConfig
+
+module.exports = withSvgr({
+  webpack(config, options) {
+    return config
+  },
+})
