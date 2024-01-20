@@ -4,7 +4,7 @@ import { Spinner } from '@/Components/spinner/spinner'
 import { logIn } from '@/actions/auth'
 import GoogleIcon from '@/assets/img/icons/google-icon.svg'
 import { ROUTES } from '@/constants/routes.constants'
-import { db } from '@/db/db'
+// import { db } from '@/db/'
 
 import EmailRoundedIcon from '@mui/icons-material/EmailRounded'
 import KeyRoundedIcon from '@mui/icons-material/KeyRounded'
@@ -38,6 +38,7 @@ export default function Login() {
   const [isPending, startTransition] = useTransition()
 
   const onSubmit: SubmitHandler<TLoginInput> = async (data) => {
+    logIn(data)
     // startTransition(() => logIn(data))
     // logIn(data)
     //   .unwrap()

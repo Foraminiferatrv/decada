@@ -46,7 +46,7 @@
     "**/*.tsx",
     ".next/types/**/*.ts",
     "db/knexfile.ts"
-  ],
+, "lib/db/migrate-to-latest.mts"  ],
   "exclude": [
     "node_modules"
   ]

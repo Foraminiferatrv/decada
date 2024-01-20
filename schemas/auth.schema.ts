@@ -1,15 +1,19 @@
-import { Type, Static } from '@sinclair/typebox'
+import * as z from 'zod'
 
-export const signUpSchema = Type.Object({
-  email: Type.String({ format: 'email' }),
-  password: Type.String({ minLength: 6 }),
-  name: Type.String(),
-  image: Type.Optional(Type.String()),
+export const SignUpSchema = z.object({
+  email: z.string().email({
+    message: 'Email is required.',
+  }),
+  password: z.string().min(4, { message: 'Password is required' }),
+  name: z.string().min(1, {
+    message: 'Name is required',
+  }),
+  image: z.optional(z.string()),
 })
-export type SignupSchema = Static<typeof signUpSchema>
 
-export const logInSchema = Type.Object({
-  email: Type.String({ format: 'email' }),
-  password: Type.String({ minLength: 6 }),
+export const LoginSchema = z.object({
+  email: z.string().email({
+    message: 'Email is required',
+  }),
+  password: z.string().min(4, { message: 'Password is required' }),
 })
-export type LoginSchema = Static<typeof logInSchema>

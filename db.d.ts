@@ -90,7 +90,6 @@ export interface User {
   id: Generated<string>;
   image: string | null;
   name: string | null;
-  password: string;
 }
 
 export interface VerificationToken {

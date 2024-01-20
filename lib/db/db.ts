@@ -1,11 +1,12 @@
-import { DB } from '@/schemas/db.schema'
+import { DB as Database} from '@/schemas/db.schema'
 import { Pool } from 'pg'
 import { Kysely, PostgresDialect } from 'kysely'
 
 import { loadEnvConfig } from '@next/env'
+import { KyselyAuth } from '@auth/kysely-adapter'
 
 declare global {
-  var kysely: Kysely<DB> | undefined
+  var kysely: Kysely<Database> | undefined
 }
 
 const dev = process.env.NODE_ENV !== 'production'
@@ -24,21 +25,8 @@ const dialect = new PostgresDialect({
 
 export const db =
   globalThis.kysely ||
-  new Kysely<DB>({
+  new KyselyAuth<Database, Database>({
     dialect,
   })
 
 if (process.env.NODE_ENV !== 'production') globalThis.kysely = db
-
-// import knex, { type Knex } from 'knex'
-// import knexfile from './knexfile'
-
-// export const db = globalThis.knex || knex(knexfile)
-// // if (!cached) cached = global.pg = {}
-
-// // export function getKnex<T>(): Knex {
-// //   if (!cached.instance) cached.instance = knex<T>(knexfile)
-// //   return cached.instance
-// // }
-
-// if (process.env.NODE_ENV !== 'production') globalThis.knex = db
