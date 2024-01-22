@@ -2,7 +2,7 @@ import React from 'react'
 
 export default function AuthLayout({ children }: React.PropsWithChildren) {
   return (
-    <div className='h-full  bg-main-100'>
+    <div className='h-svh  bg-main-100'>
       <div className='h-full top-0 w-full fixed z-10'>
         <svg
           className='h-full absolute left-[-10%] z-0'

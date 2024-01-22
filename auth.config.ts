@@ -19,7 +19,7 @@ export default {
 
           // const user = await getUserByEmail(email)
           const [user] = await db
-            .selectFrom('User')
+            .selectFrom('user')
             .selectAll()
             .where('email', '=', email)
             .execute()
