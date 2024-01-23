@@ -1,16 +1,18 @@
 'use server'
-import { loadEnvConfig } from '@next/env'
-import { SignUpSchema, LoginSchema } from '@/schemas/auth.schema'
-import * as z from 'zod'
-import bcrypt from 'bcryptjs'
+
 import { db } from '@/lib/db/db'
-import { v4 as uuidv4 } from 'uuid'
 import { getUserByEmail } from '@/lib/db/utils/user.utils'
+
 // import { signIn } from '@/auth'
 import { DEFAULT_LOGIN_REDIRECT } from '@/constants/routes.constants'
-
-import { AuthError } from 'next-auth'
 import { auth } from '@/lucia'
+import { LoginSchema, SignupSchema } from '@/schemas/auth.schema'
+import { loadEnvConfig } from '@next/env'
+
+import bcrypt from 'bcryptjs'
+import { AuthError } from 'next-auth'
+import { v4 as uuidv4 } from 'uuid'
+import * as z from 'zod'
 
 const { PASSWORD_SALT } = loadEnvConfig('../').combinedEnv
 
@@ -43,7 +45,7 @@ export const logIn = async (credentials: z.infer<typeof LoginSchema>) => {
   // }
 }
 
-export const signUp = async (credentials: z.infer<typeof SignUpSchema>) => {
+export const signUp = async (credentials: z.infer<typeof SignupSchema>) => {
   const validatedFields = SignUpSchema.safeParse(credentials)
 
   if (!validatedFields.success) {
@@ -72,7 +74,6 @@ export const signUp = async (credentials: z.infer<typeof SignUpSchema>) => {
       },
       attributes: {
         username: name,
-        email,
       },
     })
     console.log({ user })
@@ -88,7 +89,7 @@ export const signUp = async (credentials: z.infer<typeof SignUpSchema>) => {
     console.log({ session })
   } catch (error) {
     console.log(error)
-    return { error: error.message }
+    return { error: error }
   }
   return { success: 'User created!' }
 }

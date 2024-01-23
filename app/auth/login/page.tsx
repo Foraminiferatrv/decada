@@ -1,21 +1,23 @@
 'use client'
+
+import { useState, useTransition } from 'react'
+// import { getKnex } from '@/db/knex'
+// import { T_User } from '@/models/user.model'
+import { SubmitHandler, useForm } from 'react-hook-form'
+import { toast } from 'react-toastify'
+
 import { Input } from '@/Components/input/input'
 import { Spinner } from '@/Components/spinner/spinner'
 import { logIn } from '@/actions/auth'
 import GoogleIcon from '@/assets/img/icons/google-icon.svg'
 import { ROUTES } from '@/constants/routes.constants'
 // import { db } from '@/db/'
-
 import EmailRoundedIcon from '@mui/icons-material/EmailRounded'
 import KeyRoundedIcon from '@mui/icons-material/KeyRounded'
 import InputAdornment from '@mui/material/InputAdornment'
+
 import Link from 'next/link'
-import { useTransition } from 'react'
-
-// import { getKnex } from '@/db/knex'
-// import { T_User } from '@/models/user.model'
-
-import { SubmitHandler, useForm } from 'react-hook-form'
+import { redirect } from 'next/navigation'
 
 // const getDataFromDb = async () => {
 //   const knex = getKnex()
@@ -28,17 +30,37 @@ import { SubmitHandler, useForm } from 'react-hook-form'
 type TLoginInput = { email: string; password: string }
 
 export default function Login() {
+  const [isPending, startTransition] = useTransition()
+  const [error, setError] = useState<string | null>(null)
+
   const {
     register,
     handleSubmit,
     watch,
     formState: { errors },
   } = useForm<TLoginInput>({ defaultValues: { email: '', password: '' } })
-
-  const [isPending, startTransition] = useTransition()
+  const isFormError = !!Object.keys(errors).length
 
   const onSubmit: SubmitHandler<TLoginInput> = async (data) => {
-    logIn(data)
+    startTransition(async () => {
+      console.log({ data })
+      // signUp(data).then((res) => {
+      const res = await fetch('/api/auth/login', {
+        method: 'POST',
+        body: JSON.stringify({ data }),
+      })
+      if (res.status === 400) {
+        const resData = await res.json()
+        setError(resData?.error)
+        console.log(resData)
+        toast.error(resData?.error)
+      }
+      
+      if (res.ok) redirect(ROUTES.GOAL)
+      // if (res) setError(res)
+    })
+    // logIn(data)
+
     // startTransition(() => logIn(data))
     // logIn(data)
     //   .unwrap()
@@ -90,6 +112,7 @@ export default function Login() {
             </div>
           ) : (
             <button
+              disabled={isFormError}
               className='mt-3 h-11 cursor-pointer appearance-none rounded-lg bg-main-400 font-black text-gray-600 hover:bg-main-100 active:bg-main-700'
               type='submit'
             >

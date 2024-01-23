@@ -1,28 +1,27 @@
 'use client'
+
+import { useState, useTransition } from 'react'
+// import { getKnex } from '@/db/knex'
+// import { T_User } from '@/models/user.model'
+import { SubmitHandler, useForm } from 'react-hook-form'
+import { toast } from 'react-toastify'
+
+import { SignupSchema } from '@/schemas/auth.schema'
+
 import { Input } from '@/Components/input/input'
 import { Spinner } from '@/Components/spinner/spinner'
 import { logIn, signUp } from '@/actions/auth'
 import GoogleIcon from '@/assets/img/icons/google-icon.svg'
-
-import { toast } from 'react-toastify'
-
-import { yupResolver } from '@hookform/resolvers/yup'
-
+import { ROUTES } from '@/constants/routes.constants'
+import { zodResolver } from '@hookform/resolvers/zod'
 import BadgeIcon from '@mui/icons-material/Badge'
-
 import EmailRoundedIcon from '@mui/icons-material/EmailRounded'
 import KeyRoundedIcon from '@mui/icons-material/KeyRounded'
-import InputAdornment from '@mui/material/InputAdornment'
-import { useState, useTransition } from 'react'
 
-import * as yup from 'yup'
-
-// import { getKnex } from '@/db/knex'
-// import { T_User } from '@/models/user.model'
-
-import { SubmitHandler, useForm } from 'react-hook-form'
 import Link from 'next/link'
-import { ROUTES } from '@/constants/routes.constants'
+import { redirect } from 'next/navigation'
+import * as yup from 'yup'
+import * as z from 'zod'
 
 // const getDataFromDb = async () => {
 //   const knex = getKnex()
@@ -32,24 +31,26 @@ import { ROUTES } from '@/constants/routes.constants'
 //   return result
 // }
 
+const LoginFormSchema = SignupSchema.merge(
+  z.object({
+    repeatPassword: z.string().min(1, {
+      message: 'Repeat your password',
+    }),
+  }),
+).refine(
+  (values) => {
+    return values.password === values.repeatPassword
+  },
+  {
+    message: 'Passwords must match!',
+    path: ['repeatPassword'],
+  },
+)
 type SignUpInput = { name: string; email: string; password: string; repeatPassword: string }
 
 export default function SignUp() {
   const [isPasswordVisible, setIsPasswordVisible] = useState<boolean>(false)
   const [error, setError] = useState<string | null>(null)
-
-  const singUpSchema = yup.object({
-    name: yup.string().required('name is required.').max(100),
-    email: yup.string().required('E-mail is required.').email('Provide a valid email.'),
-    password: yup
-      .string()
-      .required('Password is required.')
-      .min(4, 'Password length should be at least 4 characters'),
-    repeatPassword: yup
-      .string()
-      .required('Repeat your password.')
-      .oneOf([yup.ref('password')], 'Passwords do not match'),
-  })
 
   const {
     register,
@@ -57,19 +58,27 @@ export default function SignUp() {
     watch,
     formState: { errors },
   } = useForm<SignUpInput>({
-    resolver: yupResolver(singUpSchema),
+    resolver: zodResolver(LoginFormSchema),
     defaultValues: { name: '', email: '', password: '', repeatPassword: '' },
   })
+  const isFormError = !!Object.keys(errors).length
 
   const [isPending, startTransition] = useTransition()
 
   const onSubmit: SubmitHandler<SignUpInput> = (data): void => {
-    startTransition(() =>
-      signUp(data).then((res) => {
-        if (res.error) setError(res.error)
-        console.log({ res })
-      }),
-    )
+    startTransition(async () => {
+      console.log({ data })
+      // signUp(data).then((res) => {
+      const res = await fetch('/api/auth/signup', {
+        method: 'POST',
+        body: JSON.stringify({ data }),
+      })
+
+      if (res.ok) redirect(ROUTES.GOAL)
+      // if (res) setError(res)
+
+      console.log({ res: res })
+    })
     // startTransition(() => logIn(data))
     // SignIn(data)
     //   .unwrap()
@@ -87,6 +96,7 @@ export default function SignUp() {
   // const handleCreateAccount = (): void => {
   //   navigate(ROUTES.SIGN_UP)
   // }
+  console.log(errors)
   watch()
 
   return (
@@ -146,7 +156,8 @@ export default function SignUp() {
             </div>
           ) : (
             <button
-              className='mt-3 h-11 cursor-pointer appearance-none rounded-lg bg-main-400 font-black text-gray-600 hover:bg-main-100 active:bg-main-700'
+              disabled={isFormError}
+              className='mt-3 h-11 cursor-pointer appearance-none rounded-lg bg-main-400 font-black text-gray-600 hover:bg-main-100 active:bg-main-700 disabled:bg-gray-100'
               type='submit'
             >
               Sign in

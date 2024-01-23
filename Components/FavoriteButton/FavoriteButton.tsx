@@ -12,7 +12,6 @@ type T_FavoriteButtonProps = IconButtonProps & {
   onClick: () => void
 }
 export const FavoriteButton = ({ isFavorite, onClick, ...props }: T_FavoriteButtonProps) => {
-  console.log(props.className)
   return (
     <IconButton
       className={` ${S.FavoriteButton} ${isFavorite ? S.IsFavorite : ''} ${props.className}`}

@@ -12,10 +12,15 @@ export const ROUTES = {
   HABITS: '/plan/habits',
   TIME: '/plan/time',
 }
+export const API_ROUTES = {
+  LOGIN: '/api/auth/login',
+  SIGN_UP: '/api/auth/signup',
+  SIGN_OUT: '/api/auth/sign-out',
+}
 
 export const PUBLIC_ROUTES = ['/']
 
-export const AUTH_ROUTES = [ROUTES.LOGIN, ROUTES.SIGN_UP]
+export const AUTH_ROUTES = [API_ROUTES.LOGIN, API_ROUTES.SIGN_UP]
 
 export const apiAuthPrefix = '/api/auth'
 

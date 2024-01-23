@@ -8,6 +8,9 @@ import {
   ROUTES,
   apiAuthPrefix,
 } from './constants/routes.constants'
+import { NextApiRequest } from 'next'
+
+import type { NextRequest } from 'next/server'
 
 // const { auth } = NextAuth(authConfig)
 
@@ -36,7 +39,7 @@ import {
 //   return null
 // })
 
-export default function middleware() {
+export default function middleware(req: NextRequest) {
   return null
 }
 
